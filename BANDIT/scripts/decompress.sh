@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Recurso obtenido de S4vitar.
+
 xxd -r data.txt > data
 
 name_compressed=$(7z l data | grep "Name" -A 2 | tail -n 1 | awk 'NF{print $NF}')
