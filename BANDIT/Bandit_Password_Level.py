@@ -80,8 +80,9 @@ def BANDIT(level : str, user : str, command : str):
 def bandit_12(level : str, user : str, password : str):
 
     # Decompress subido a github, solo descargar y ejecutar
+    # Intentar mejorar y automatizar
 
-    cmd = "sshpass -p "+password+" scp -q -P 2220 "+user+"@"+host+":data.txt /tmp/Bandit"
+    cmd = "sshpass -p " + password + " scp -q -P 2220 " + user + "@" + host + ":data.txt /tmp/Bandit"
     call(cmd.split(" "))
     
     os.system("wget -q https://raw.githubusercontent.com/ARMoreno99/OverTheWire/main/BANDIT/scripts/decompress.sh  && chmod +x decompress.sh")
@@ -94,15 +95,34 @@ def bandit_12(level : str, user : str, password : str):
     print("\x1b[1;37m"+"#---------------------------------------------------#"+"\x1b[0;37m")
     print("| Flag Level " + level + ": " + readflag.strip("\n") + "   |")
 
+
 def bandit_13(level : str, user : str, password : str):
 
-    os.system('sshpass -p wbWdlBxEir4CaE8LaPhauuOo6pwRmrDw ssh -q bandit13@bandit.labs.overthewire.org -oStrictHostKeyChecking=no -p2220 "ssh -q -i sshkey.private bandit14@localhost -oStrictHostKeyChecking=no -p2220 cat /etc/bandit_pass/bandit14" >> flag.txt')
+    # Intentar mejorar y autmatizar
+
+    os.system('sshpass -p wbWdlBxEir4CaE8LaPhauuOo6pwRmrDw ssh -q bandit13@bandit.labs.overthewire.org -oStrictHostKeyChecking=no -p 2220 ssh -q -i sshkey.private bandit14@localhost -oStrictHostKeyChecking=no -p2220 cat /etc/bandit_pass/bandit14 >> flag.txt')
     flag = open('flag.txt' , 'r+')
     readflag = flag.readlines()
     readflag = readflag[-1]
     readflag = readflag.strip('\n')
     print("\x1b[1;37m"+"#---------------------------------------------------#"+"\x1b[0;37m")
     print("| Flag Level " + level + ": " + readflag.strip("\n") + "   |")
+
+
+def bandit_14(level : str, user : str, password : str):
+
+    # Intentar mejorar y automatizar
+
+    os.system("sshpass -p \"fGrHPx402xGC7U7rXKDaxiWFTOiF0ENq\" ssh -q bandit14@bandit.labs.overthewire.org -p2220 \"echo fGrHPx402xGC7U7rXKDaxiWFTOiF0ENq | nc localhost 30000 | tail -n2 | head -n1\" >> flag.txt")
+    flag = open('flag.txt' , 'r+')
+    readflag = flag.readlines()
+    readflag = readflag[-1]
+    readflag = readflag.strip('\n')
+    print("\x1b[1;37m"+"#---------------------------------------------------#"+"\x1b[0;37m")
+    print("| Flag Level " + level + ": " + readflag.strip("\n") + "   |")
+    
+
+
 
 
 if __name__ == '__main__':
@@ -123,6 +143,7 @@ if __name__ == '__main__':
     bandit_12("12", "bandit12", "JVNBBFSmZwKKOP0XbFXOoW8chDz5yVRv") # Revisar con Guille, Intentar quitar la contraseña y automatizarlo
     #BANDIT("13", "bandit13", 'sshpass -p wbWdlBxEir4CaE8LaPhauuOo6pwRmrDw ssh -q bandit13@bandit.labs.overthewire.org -oStrictHostKeyChecking=no -p2220 "ssh -q -i sshkey.private bandit14@localhost -oStrictHostKeyChecking=no -p2220 cat /etc/bandit_pass/bandit14"')
     bandit_13("13", "bandit13", "wbWdlBxEir4CaE8LaPhauuOo6pwRmrDw")
+    bandit_14("14", "bandit14", "fGrHPx402xGC7U7rXKDaxiWFTOiF0ENq")
     print("\x1b[1;37m"+"#---------------------------------------------------#"+"\x1b[0;37m")
     flag.close()
     
