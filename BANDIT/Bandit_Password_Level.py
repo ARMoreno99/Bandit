@@ -1,10 +1,8 @@
 #!/usr/bin/python3
-
 # SITIO WEB: https://overthewire.org/wargames/bandit/bandit0.html
 # Autor: Cyb3r4l3
 # Colaborador: Kek1us
 # Fecha: 13/11/2022
-
 
 import os
 import paramiko
@@ -21,32 +19,37 @@ client = paramiko.SSHClient()
 client.load_system_host_keys()
 client.set_missing_host_key_policy(paramiko.client.WarningPolicy())
 
+# CREAR CARPETA
+path = "/tmp/Bandit"
+os.system("mkdir -p /tmp/Bandit")
+os.chdir(path)
+
 # FICHEROS
 flag = open('flag.txt', 'w')
 
 
 def banner():
-    print ("______   ___   _   _ ______  _____  _____ ")
+    print ("\x1b[0;32m"+"______   ___   _   _ ______  _____  _____ ")
     print ("| ___ \ / _ \ | \ | ||  _  \|_   _||_   _|")
     print ("| |_/ // /_\ \|  \| || | | |  | |    | |")
     print ("| ___ \|  _  || . ` || | | |  | |    | |")
     print ("| |_/ /| | | || |\  || |/ /  _| |_   | |")
     print ("\____/ \_| |_/\_| \_/|___/   \___/   \_/")
 
-    print ("\n      ###PASSWORD LEVEL BANDIT###       \n")
+    print ("\x1b[1;33m"+"\n      ###PASSWORD LEVEL BANDIT###       \n"+"\x1b[0;37m")
 
 
 def bandit_init(user : str, password : str, command : str):
         
         try:
-            client.connect(host, port, username=user, password=password, allow_agent=False, timeout=30)
+            client.connect(host, port, username=user, password=password, timeout=100)
         except Exception as e:
             print(e)
 
         stdin, stdout, stderr = client.exec_command(command)
 
         for line in stdout:
-            print("#---------------------------------------------------#")
+            print("\x1b[1;37m"+"#---------------------------------------------------#"+"\x1b[0;37m")
             print("| Flag Level 0: " + line.strip('\n') + "    |")
             flag.write(line)
 
@@ -62,32 +65,33 @@ def BANDIT(level : str, user : str, command : str):
         readflag = readflag.strip('\n')
         
         try:
-            client.connect(host, port, username=user, password=readflag, allow_agent=False, timeout=30)
+            client.connect(host, port, username=user, password=readflag, timeout=100)
         except Exception as e:
             print(e)
         stdin, stdout, stderr = client.exec_command(command)
         for line in stdout:
-            print("#---------------------------------------------------#")
+            print("\x1b[1;37m"+"#---------------------------------------------------#"+"\x1b[0;37m")
             print("| Flag Level " + level + ": " + line.strip("\n") + "   |")
             flag.write(line)
 
-        
         client.close()
 
 
 def bandit_12(level : str, user : str, password : str):
 
-    # Crear archivo decompress.sh desde el script de python
+    # Decompress subido a github, solo descargar y ejecutar
 
-    cmd = "sshpass -p "+password+" scp -q -P 2220 "+user+"@"+host+":data.txt /home/alejandro/Desktop/"
+    cmd = "sshpass -p "+password+" scp -q -P 2220 "+user+"@"+host+":data.txt /tmp/Bandit"
     call(cmd.split(" "))
     
+    os.system("wget -q https://raw.githubusercontent.com/ARMoreno99/OverTheWire/main/BANDIT/scripts/decompress.sh  && chmod +x decompress.sh")
     os.system("/bin/bash decompress.sh data.txt >> flag.txt")
+
     flag = open('flag.txt' , 'r+')
     readflag = flag.readlines()
     readflag = readflag[-1]
     readflag = readflag.strip('\n')
-    print("#---------------------------------------------------#")
+    print("\x1b[1;37m"+"#---------------------------------------------------#"+"\x1b[0;37m")
     print("| Flag Level " + level + ": " + readflag.strip("\n") + "   |")
 
 def bandit_13(level : str, user : str, password : str):
@@ -97,7 +101,7 @@ def bandit_13(level : str, user : str, password : str):
     readflag = flag.readlines()
     readflag = readflag[-1]
     readflag = readflag.strip('\n')
-    print("#---------------------------------------------------#")
+    print("\x1b[1;37m"+"#---------------------------------------------------#"+"\x1b[0;37m")
     print("| Flag Level " + level + ": " + readflag.strip("\n") + "   |")
 
 
@@ -119,7 +123,7 @@ if __name__ == '__main__':
     bandit_12("12", "bandit12", "JVNBBFSmZwKKOP0XbFXOoW8chDz5yVRv") # Revisar con Guille, Intentar quitar la contraseña y automatizarlo
     #BANDIT("13", "bandit13", 'sshpass -p wbWdlBxEir4CaE8LaPhauuOo6pwRmrDw ssh -q bandit13@bandit.labs.overthewire.org -oStrictHostKeyChecking=no -p2220 "ssh -q -i sshkey.private bandit14@localhost -oStrictHostKeyChecking=no -p2220 cat /etc/bandit_pass/bandit14"')
     bandit_13("13", "bandit13", "wbWdlBxEir4CaE8LaPhauuOo6pwRmrDw")
-    print("#---------------------------------------------------#")
+    print("\x1b[1;37m"+"#---------------------------------------------------#"+"\x1b[0;37m")
     flag.close()
     
     
