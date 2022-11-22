@@ -1,5 +1,16 @@
-# OverTheWire - Bandit
+# OverTheWire
 
-Script sin terminar.
+Los juegos de guerra que ofrece la comunidad OverTheWire pueden ayudarlo a aprender y practicar conceptos de seguridad en forma de juegos llenos de diversión.
 
-Se ira actualizando conforme se vayan completando niveles.
+https://overthewire.org/wargames/
+
+- Bandit [En Curso]
+- Natas
+- Leviathan
+- Krypton
+- Narnia
+- Behemoth
+- Utumno
+- Maze
+- Vortex
+
