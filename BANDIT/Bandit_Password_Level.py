@@ -80,7 +80,7 @@ def BANDIT(level : str, user : str, command : str):
 def bandit_12(level : str, user : str, password : str):
 
     # Decompress subido a github, solo descargar y ejecutar
-    # Intentar mejorar y automatizar
+    # TODO: Intentar mejorar y automatizar
 
     cmd = "sshpass -p " + password + " scp -q -P 2220 " + user + "@" + host + ":data.txt /tmp/Bandit"
     call(cmd.split(" "))
@@ -98,7 +98,7 @@ def bandit_12(level : str, user : str, password : str):
 
 def bandit_13(level : str, user : str, password : str):
 
-    # Intentar mejorar y autmatizar
+    # TODO: Intentar mejorar y autmatizar
 
     os.system('sshpass -p wbWdlBxEir4CaE8LaPhauuOo6pwRmrDw ssh -q bandit13@bandit.labs.overthewire.org -oStrictHostKeyChecking=no -p 2220 ssh -q -i sshkey.private bandit14@localhost -oStrictHostKeyChecking=no -p2220 cat /etc/bandit_pass/bandit14 >> flag.txt')
     flag = open('flag.txt' , 'r+')
@@ -111,7 +111,7 @@ def bandit_13(level : str, user : str, password : str):
 
 def bandit_14(level : str, user : str, password : str):
 
-    # Intentar mejorar y automatizar
+    # TODO: Intentar mejorar y automatizar
 
     os.system("sshpass -p \"fGrHPx402xGC7U7rXKDaxiWFTOiF0ENq\" ssh -q bandit14@bandit.labs.overthewire.org -p2220 \"echo fGrHPx402xGC7U7rXKDaxiWFTOiF0ENq | nc localhost 30000 | tail -n2 | head -n1\" >> flag.txt")
     flag = open('flag.txt' , 'r+')
@@ -140,10 +140,11 @@ if __name__ == '__main__':
     BANDIT("9", "bandit9", "strings data.txt | grep \"===\" | tail -n1 | awk '{print $NF}'")
     BANDIT("10", "bandit10", "cat data.txt | base64 -d | awk '{print $NF}'")
     BANDIT("11", "bandit11", "cat data.txt | tr 'A-Za-z' 'N-ZA-Mn-za-m' | awk '{print $NF}'")
-    bandit_12("12", "bandit12", "JVNBBFSmZwKKOP0XbFXOoW8chDz5yVRv") # Revisar con Guille, Intentar quitar la contraseña y automatizarlo
-    #BANDIT("13", "bandit13", 'sshpass -p wbWdlBxEir4CaE8LaPhauuOo6pwRmrDw ssh -q bandit13@bandit.labs.overthewire.org -oStrictHostKeyChecking=no -p2220 "ssh -q -i sshkey.private bandit14@localhost -oStrictHostKeyChecking=no -p2220 cat /etc/bandit_pass/bandit14"')
+    bandit_12("12", "bandit12", "JVNBBFSmZwKKOP0XbFXOoW8chDz5yVRv") # TODO: Revisar con Kek1us, Intentar quitar la contraseña y automatizarlo
+    # TODO: BANDIT("13", "bandit13", 'sshpass -p wbWdlBxEir4CaE8LaPhauuOo6pwRmrDw ssh -q bandit13@bandit.labs.overthewire.org -oStrictHostKeyChecking=no -p2220 "ssh -q -i sshkey.private bandit14@localhost -oStrictHostKeyChecking=no -p2220 cat /etc/bandit_pass/bandit14"')
     bandit_13("13", "bandit13", "wbWdlBxEir4CaE8LaPhauuOo6pwRmrDw")
     bandit_14("14", "bandit14", "fGrHPx402xGC7U7rXKDaxiWFTOiF0ENq")
+    BANDIT("15", "bandit15", "echo 'jN2kgmIXJ6fShzhT2avhotn4Zcka6tnt' | openssl s_client -quiet -connect localhost:30001 2>/dev/null | grep -v Correct! | tr -d '\n'")
     print("\x1b[1;37m"+"#---------------------------------------------------#"+"\x1b[0;37m")
     flag.close()
     
