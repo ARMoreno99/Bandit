@@ -4,7 +4,7 @@ Los juegos de guerra que ofrece la comunidad OverTheWire pueden ayudarlo a apren
 
 LINK -> https://overthewire.org/wargames/
 
- <a href="https://overthewire.org/wargames/" target="_blank"> alt="Hack The Box">
+ <a href="https://overthewire.org/wargames/" target="_blank"> OverTheWire
 
 - Bandit [En Curso]
 - Natas
