@@ -4,7 +4,7 @@ Los juegos de guerra que ofrece la comunidad OverTheWire pueden ayudarlo a apren
 
 
 
- <a href="https://overthewire.org/wargames/" target="_blank"> OverTheWire >
+ <a href="https://overthewire.org/wargames/" target="_blank"> OverTheWire 
 
 - Bandit [En Curso]
 - Natas
